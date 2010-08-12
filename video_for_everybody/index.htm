@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>Movie</title>
+        <!--
+        <script src="video.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            var bodyLoaded = function(){
+            VideoJS.setup();
+            }
+        </script>
+        <link rel="stylesheet" href="video-js.css" type="text/css" media="screen" title="Video JS" charset="utf-8">
+        -->
+    </head>
+
+    <body>
+    <!--<body id="body" onload="bodyLoaded()">-->
+        <!-- "Video For Everybody" v0.4 by Kroc Camen of Camen Design <http://camendesign.com/code/video_for_everybody>
+            =================================================================================================================== -->
+        <!-- first try HTML5 playback. if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise       -->
+        <!-- warning: playback does not work on iPad/iPhone if you include the poster attribute! we're awaiting a fix from apple -->
+        <div style="vertical-align: middle; text-align: center;" >
+            <video width="640" height="480" poster="poster.png" controls>
+                <!-- MP4 must be first for iPad! you must use `</source>` to avoid a closure bug in Firefox 3.0 / Camino 2.0! -->
+                <source src="movie.mp4" type="video/mp4" /><!--</source>--><!-- Safari / iPhone video    -->
+                <source src="movie.ogv" type="video/ogg" /><!--</source>--> <!-- Firefox native OGG video -->
+                <!-- fallback to Flash -->
+                <object width="640" height="384" type="application/x-shockwave-flash"
+                    data="player.swf?image=poster.png&amp;file=movie.mp4">
+                    <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
+                    <param name="movie" value="player.swf?image=poster.png&amp;file=movie.mp4" />
+                    <!-- fallback image. note the title field below, put the title of the video there -->
+                    <img src="poster.png" width="640" height="480" alt="Movie"
+                        title="No video playback capabilities, please download the video below" />
+                </object>
+            </video>
+
+            <!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
+            <p>
+                Download Video: <a href="movie.ogv">Open Format: OGG container, Theora compression</a> | <a href="movie.mp4">Patent encumbered: MP4 container, H.264 compression</a>
+            </p>
+
+
+            <!-- http://videojs.com/ -->
+            <!--
+            <div class="video-box" >
+                <!- - Using the Video for Everybody Embed Code (modified for VP8/WebM) http://camendesign.com/code/video_for_everybody - ->
+                <video id="video" class="video-js" width="640" height="480" poster="poster.png" autobuffer>
+                <source src="http://www.science.uottawa.ca/~lramu594/nicolas/Ar_cluster_exploding/movie.ogv" type="video/ogg"></source>
+                <source src="movie.webm" type="video/webm"></source>
+                <source src="movie.mp4" type="video/mp4"></source>
+                <object width="640" height="480" type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf">
+                    <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                    <param name="allowfullscreen" value="true" />
+                    <param name="flashvars" value='config={"clip":"movie.mp4"}' />
+                    <img src="poster.png" width="640" height="264" alt="Poster Image" title="No video playback capabilities." />
+                </object>
+                </video>
+            </div>
+            -->
+
+        </div>
+
+        <p>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px"
+                    src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                    alt="Valid CSS!" />
+            </a>
+        </p>
+
+    </body>
+</html>
