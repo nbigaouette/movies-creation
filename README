@@ -3,8 +3,8 @@ choice of a video codec and container is a complicated one: you never know
 if a specific machine will be able to play the video.
 
 Thanks to open source, we now have a free (as in free speech!) solution.
-Theora video compression (the codec, see http://en.wikipedia.org/wiki/Theora )
-contained inside an Ogg container (see http://en.wikipedia.org/wiki/Ogg ).
+Theora video compression (the codec, see http://en.wikipedia.org/wiki/Theora)
+contained inside an Ogg container (see http://en.wikipedia.org/wiki/Ogg).
 
 The only thing missing is an easy way to convert a set of images, mainly PNGs,
 to a movie, without converting them to obscure intermediary formats.
