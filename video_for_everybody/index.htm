@@ -17,26 +17,48 @@
     </head>
 
     <body>
-    <!--<body id="body" onload="bodyLoaded()">-->
-        <!-- "Video For Everybody" v0.4 by Kroc Camen of Camen Design <http://camendesign.com/code/video_for_everybody>
-            =================================================================================================================== -->
-        <!-- first try HTML5 playback. if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise       -->
-        <!-- warning: playback does not work on iPad/iPhone if you include the poster attribute! we're awaiting a fix from apple -->
         <div style="vertical-align: middle; text-align: center;" >
-            <video width="640" height="480" poster="poster.png" controls>
-                <!-- MP4 must be first for iPad! you must use `</source>` to avoid a closure bug in Firefox 3.0 / Camino 2.0! -->
-                <source src="movie.mp4" type="video/mp4" /><!--</source>--><!-- Safari / iPhone video    -->
-                <source src="movie.ogv" type="video/ogg" /><!--</source>--> <!-- Firefox native OGG video -->
-                <!-- fallback to Flash -->
-                <object width="640" height="384" type="application/x-shockwave-flash"
-                    data="player.swf?image=poster.png&amp;file=movie.mp4">
-                    <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
-                    <param name="movie" value="player.swf?image=poster.png&amp;file=movie.mp4" />
-                    <!-- fallback image. note the title field below, put the title of the video there -->
-                    <img src="poster.png" width="640" height="480" alt="Movie"
-                        title="No video playback capabilities, please download the video below" />
-                </object>
-            </video>
+
+        <!-- "Video For Everybody" v0.4.1 by Kroc Camen of Camen Design <camendesign.com/code/video_for_everybody>
+            =================================================================================================================== -->
+        <!-- first try HTML5 playback: if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise       -->
+        <!-- warning: playback does not work on iPad/iPhone if you include the poster attribute! fixed in iOS4.0                 -->
+        <video width="640" height="480" controls preload="none">
+            <!-- MP4 must be first for iPad! -->
+            <source src="__VIDEO__.MP4" type="video/mp4" /><!-- WebKit video    -->
+            <source src="__VIDEO__.OGV" type="video/ogg" /><!-- Firefox / Opera -->
+            <!-- fallback to Flash: -->
+            <object width="640" height="480" type="application/x-shockwave-flash" data="__FLASH__.SWF">
+                <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below -->
+                <param name="movie" value="__FLASH__.SWF" />
+                <param name="flashvars" value="image=__POSTER__.JPG&amp;file=__VIDEO__.MP4" />
+                <!-- fallback image. note the title field below, put the title of the video there -->
+                <img src="__VIDEO__.JPG" width="640" height="480" alt="__TITLE__"
+                    title="No video playback capabilities, please download the video below" />
+            </object>
+        </video>
+
+
+<!--     <!--<body id="body" onload="bodyLoaded()">--> -->
+<!--         <!-- "Video For Everybody" v0.4 by Kroc Camen of Camen Design <http://camendesign.com/code/video_for_everybody> -->
+<!--             =================================================================================================================== --> -->
+<!--         <!-- first try HTML5 playback. if serving as XML, expand `controls` to `controls="controls"` and autoplay likewise       --> -->
+<!--         <!-- warning: playback does not work on iPad/iPhone if you include the poster attribute! we're awaiting a fix from apple --> -->
+<!--             <video width="640" height="480" poster="poster.png" controls> -->
+<!--                 <!-- MP4 must be first for iPad! you must use `</source>` to avoid a closure bug in Firefox 3.0 / Camino 2.0! --> -->
+<!--                 <source src="movie.mp4" type="video/mp4" /><!--</source>--><!-- Safari / iPhone video    --> -->
+<!--                 <source src="movie.ogv" type="video/ogg" /><!--</source>--> <!-- Firefox native OGG video --> -->
+<!--                 <!-- fallback to Flash --> -->
+<!--                 <object width="640" height="384" type="application/x-shockwave-flash" -->
+<!--                     data="player.swf?image=poster.png&amp;file=movie.mp4"> -->
+<!--                     <!-- Firefox uses the `data` attribute above, IE/Safari uses the param below --> -->
+<!--                     <param name="movie" value="player.swf?image=poster.png&amp;file=movie.mp4" /> -->
+<!--                     <!-- fallback image. note the title field below, put the title of the video there --> -->
+<!--                     <img src="poster.png" width="640" height="480" alt="Movie" -->
+<!--                         title="No video playback capabilities, please download the video below" /> -->
+<!--                 </object> -->
+<!--             </video> -->
+
 
             <!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
             <p>
