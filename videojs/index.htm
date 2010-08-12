@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html>
+
+    <!--
+        Template for HTML5 video using Video JS (http://videojs.com/)
+        August 12, 2010
+        Nicolas Bigaouette <nbigaouette@gmail.com>
+        Video Js git commit id: 964163a
+
+        Do a search and replace on these strings:
+            OGV_VIDEO_FILE      your Ogg+Theora video file
+            MP4_VIDEO_FILE      your Mp4+H264 video file
+            WEBM_VIDEO_FILE     your WebM video file
+            PAGE_TITLE          The page/video title
+            MP4_URL             The full url for the mp4 file. Flash fallback needs a FULL url.
+            VIDEO_WIDTH         The video width
+            VIDEO_HEIGHT        The video height
+    -->
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>PAGE_TITLE</title>
+
+        <!-- Include the VideoJS Library -->
+        <script src="videojs/video.js" type="text/javascript" charset="utf-8"></script>
+        <!-- JQuery not required, but used for dom ready function -->
+        <script src="videojs/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+
+        <script type="text/javascript">
+            // Run the script on page load.
+            // Using JQuery's DOM Ready function
+            // You can also use window.onload, but it loads slower
+            $(function(){
+                VideoJS.setup();
+            })
+            // If not using a JS library
+            //window.onload = function(){
+            //    VideoJS.setup();
+            //}
+        </script>
+        <!-- Include the VideoJS Stylesheet -->
+        <link rel="stylesheet" href="videojs/video-js.css" type="text/css" media="all" />
+
+        <script src="flowplayer/flowplayer-3.2.2.min.js"></script>
+
+
+    </head>
+
+    <body>
+        <div style="vertical-align: middle; text-align: center;" >
+
+            <h1>
+                PAGE_TITLE
+            </h1>
+
+            <!-- Begin VideoJS -->
+            <div class="video-js-box">
+                <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+                <video class="video-js" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" poster="poster.png" controls preload>
+                    <source src="MP4_VIDEO_FILE" type='video/mp4'>
+                    <source src="WEBM_VIDEO_FILE" type='video/webm; codecs="vp8, vorbis"'>
+                    <source src="OGV_VIDEO_FILE" type='video/ogg; codecs="theora, vorbis"'>
+                    <object class="vjs-flash-fallback" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" type="application/x-shockwave-flash" data="flowplayer/flowplayer.swf">
+                        <param name="movie" value="flowplayer/flowplayer.swf" />
+                        <param name="allowfullscreen" value="true" />
+                        <param name="flashvars" value='config={"clip":{"url":"MP4_URL/MP4_VIDEO_FILE","autoPlay":false,"autoBuffering":true}}' />
+                        <img src="poster.png" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" alt="PAGE_TITLE" title="No video playback capabilities." />
+                    </object>
+                </video>
+            </div>
+
+            <!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
+            <p>
+                Download Video: <a href="OGV_VIDEO_FILE">Open Format: OGG container, Theora compression</a> | <a href="MP4_VIDEO_FILE">Patent encumbered: MP4 container, H.264 compression</a>
+            </p>
+
+            <!-- **************************************************************************************************************** -->
+            <h1>
+                <a href="http://www.science.uottawa.ca/lramunno/">Prof. Lora Ramunno's Computationnal Nanophotonics Group</a>
+            </h1>
+
+            <p>
+                Lora Ramunno: <a href="mailto:lora.ramunno@uottawa.ca">lora.ramunno@uottawa.ca</a>
+            </p>
+            <p>
+                Edward Ackad: <a href="mailto:eackad@gmail.com">eackad@gmail.com</a>
+            </p>
+            <p>
+                Nicolas Bigaouette: <a href="mailto:nbigaouette@gmail.com">nbigaouette@gmail.com</a>
+            </p>
+            <!-- **************************************************************************************************************** -->
+
+        </div>
+
+        <p>
+            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                <img style="border:0;width:88px;height:31px"
+                    src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                    alt="Valid CSS!" />
+            </a>
+        </p>
+
+    </body>
+</html>
