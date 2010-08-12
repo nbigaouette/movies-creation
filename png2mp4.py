@@ -55,8 +55,11 @@ n = len(n_string)
 input_pngs = pngfiles[0].replace(n_string, "%0" + str(n) + "d")
 
 # Simple
-command = "ffmpeg -i " + input_pngs + " -an -vcodec libx264 -vpre fastfirstpass -b 512k -bt 512k -threads 0 -s " + options.resolution + " " + movie
-#command = "ffmpeg -i figures/vpython/latest/png/povray_%010d.png -pass 1 -an -vcodec libx264 -vpre fastfirstpass -vpre ipod320 -b 512k -bt 512k -threads 0 -f rawvideo -y /dev/null && ffmpeg -i myfile.avi -pass 2 -acodec copy -vcodec libx264 -vpre hq -vpre ipod320 -b 512k -bt 512k -threads 0 figures/out.mp4"
+#command = "ffmpeg -i " + input_pngs + " -an -vcodec libx264 -vpre fastfirstpass -b 512k -bt 512k -threads 0 -s " + options.resolution + " " + movie
+# http://flowplayer.org/tutorials/ffmpeg.html
+#command = "ffmpeg -i " + input_pngs + " -an -vcodec libx264 -level 41 -crf 25 -bufsize 20000k -maxrate 25000k -g 250 -r 20 -s " + "1280x720" + " -coder 1 -flags +loop -cmp +chroma -partitions +parti4x4+partp8x8+partb8x8  -keyint_min 25 -sc_threshold 40 -i_qfactor 0.71 -rc_eq 'blurCplx^(1-qComp)' -bf 16 -b_strategy 1 -bidir_refine 1 -refs 6 -deblockalpha 0 -deblockbeta 0 " + movie
+# http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
+command = "ffmpeg -i " + input_pngs + " -an -vcodec libx264 -s " + options.resolution + " -threads 0 -vpre slow -crf 25 " + movie
 
 print command
 pid = subprocess.Popen(shlex.split(command))
