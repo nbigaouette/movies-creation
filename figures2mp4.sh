@@ -53,7 +53,7 @@ output_video="${arg_output_video-${default_output_video}}"
 resolution="${arg_resolution-${default_resolution}}"
 
 # http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
-cmd = "ffmpeg -i ${figures_path}/${figures_pattern}.${format} -an -vcodec libx264 -s ${resolution} -threads 0 -vpre slow -crf 25 ${output_video}"
+cmd="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -an -vcodec libx264 -s ${resolution} -threads 0 -vpre slow -crf 25 ${output_video}"
 
 echo "$cmd"
 $cmd
