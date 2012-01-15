@@ -94,7 +94,7 @@ esac
 
 for cmd in "${commands[@]}"; do
     echo $cmd
-    $cmd
+    $cmd || exit
 done
 
 
