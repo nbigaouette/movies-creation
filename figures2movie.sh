@@ -32,7 +32,7 @@ function usage()
     echo "                              is different from the figures the video will look distorted."
     echo "                                  DEFAULT: ${default_resolution}"
     echo "-q <profile>                  x264's profile (only used with 'mp4' video format)"
-    echo "                                  DEFAULT: ${default_profile}"
+    echo "                                  DEFAULT: ${default_h264_profile}"
     echo ""
     exit
 }
@@ -61,7 +61,7 @@ figure_format="${arg_figure_format-${default_figure_format}}"
 video_filename="${arg_video_filename-${default_video_filename}}"
 video_format="${arg_video_format-${default_video_format}}"
 resolution="${arg_resolution-${default_resolution}}"
-profile="${arg_profile-${default_profile}}"
+profile="${arg_profile-${default_h264_profile}}"
 
 video_filename=${video_filename/.*/}.${video_format}
 if [[ "${figures_path#${figures_path%?}}x" != "/x" ]]; then
