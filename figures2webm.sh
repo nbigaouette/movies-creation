@@ -48,7 +48,7 @@ done
 
 figures_path="${arg_figures_path-${default_figures_path}}"
 figures_pattern="${arg_figures_pattern-${default_figures_pattern}}"
-c="${arg_format-${default_format}}"
+format="${arg_format-${default_format}}"
 output_video="${arg_output_video-${default_output_video}}"
 resolution="${arg_resolution-${default_resolution}}"
 
