@@ -52,6 +52,7 @@ c="${arg_format-${default_format}}"
 output_video="${arg_output_video-${default_output_video}}"
 resolution="${arg_resolution-${default_resolution}}"
 
+# http://blog.pcode.nl/2010/10/17/encoding-webm-using-ffmpeg/
 cmd1="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -s ${resolution} -vpre libvpx-720p -b 2000k -pass 1 -an -f webm -y ${output_video}"
 cmd2="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -s ${resolution} -vpre libvpx-720p -b 2000k -pass 2 -an -f webm -y ${output_video}"
 
