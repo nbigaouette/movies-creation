@@ -64,6 +64,9 @@ resolution="${arg_resolution-${default_resolution}}"
 profile="${arg_profile-${default_profile}}"
 
 video_filename=${video_filename/.*/}.${video_format}
+if [[ "${figures_path#${figures_path%?}}x" != "/x" ]]; then
+    figures_path="${figures_path}/"
+fi
 
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -73,14 +76,14 @@ export FFMPEG_DATADIR=${script_dir}/ffmpeg-presets/
 # http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
 case ${video_format} in
     webm)   commands=(
-                "ffmpeg -an -i ${figures_path}/${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
-                "ffmpeg -an -i ${figures_path}/${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
             );;
     ogv)    commands=(
-                "ffmpeg -an -i ${figures_path}/${figures_pattern}.${figure_format} -s ${resolution} -vcodec libtheora -b:v 2000k ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vcodec libtheora -b:v 2000k ${video_filename}"
             );;
     mp4)    commands=(
-                "ffmpeg -an -i ${figures_path}/${figures_pattern}.${figure_format} -vcodec libx264 -s ${resolution} -threads 0 -vpre ${profile} -crf 25 ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -vcodec libx264 -s ${resolution} -threads 0 -vpre ${profile} -crf 25 ${video_filename}"
             );;
 esac
 
