@@ -3,20 +3,10 @@ choice of a video codec and container is a complicated one: you never know
 if a specific machine will be able to play the video.
 
 Thanks to open source, we now have a free (as in free speech!) solution.
-Theora video compression (the codec, see http://en.wikipedia.org/wiki/Theora)
+There is Theora video compression (the codec, see http://en.wikipedia.org/wiki/Theora)
 contained inside an Ogg container (see http://en.wikipedia.org/wiki/Ogg).
+But a better video compression should be VP8 from On2 (bought by Google). After
+the acquisition Google released WebM, which is VP8 for video compression
+contained inside the Matroska container.
 
-The only thing missing is an easy way to convert a set of images, mainly PNGs,
-to a movie, without converting them to obscure intermediary formats.
 
-After a long search, I found the easiest solution was to used "png2theora.c" from
-the Xiph project (creators of Ogg), available on Xiph's subversion repository
-(http://svn.xiph.org/trunk/theora-tools/png2theora/png2theora.c). I'm putting
-the source here too. Compile with:
-$ gcc -ltheora -ltheoraenc -ltheoradec -lpng  png2theora.c -o png2theora
-making sure you have theora and ogg packages installed.
-
-The scripts I'm posting here are wrappers around encoders. png2ogv.py creates a
-Ogg+Theora movie directly using png2theora.c and png2mp4.py uses ffmpeg to
-create a (non-free, patent encumbered) H.264 compression inside an MP4 container,
-both at best video quality possible.
