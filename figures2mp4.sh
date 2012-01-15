@@ -5,6 +5,7 @@ default_figures_pattern="mov%04d"
 default_format="png"
 default_output_video="output.mp4"
 default_resolution="800x600"
+default_profile="max"
 
 function usage()
 {
@@ -26,6 +27,8 @@ function usage()
     echo "-r <resolution>               Video resolution. Note that if the aspect ratio"
     echo "                              is different from the figures the video will look distorted."
     echo "                                  DEFAULT: ${default_resolution}"
+    echo "-q <profile>                  x264's profile'"
+    echo "                                  DEFAULT: ${default_profile}"
     echo ""
     exit
 }
@@ -41,6 +44,7 @@ while getopts hi:p:f:o:r: name; do
         f)  arg_format="$OPTARG";;
         o)  arg_output_video="$OPTARG";;
         r)  arg_resolution="$OPTARG";;
+        q)  arg_profile="$OPTARG";;
         h)  usage;;
         ?)  usage;;
     esac
@@ -51,9 +55,14 @@ figures_pattern="${arg_figures_pattern-${default_figures_pattern}}"
 format="${arg_format-${default_format}}"
 output_video="${arg_output_video-${default_output_video}}"
 resolution="${arg_resolution-${default_resolution}}"
+profile="${arg_profile-${default_profile}}"
 
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+export FFMPEG_DATADIR=${script_dir}/ffmpeg-presets/
 # http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
-cmd="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -an -vcodec libx264 -s ${resolution} -threads 0 -vpre slow -crf 25 ${output_video}"
+cmd="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -an -vcodec libx264 -s ${resolution} -threads 0 -vpre ${profile} -crf 25 ${output_video}"
 
 echo "$cmd"
 $cmd
