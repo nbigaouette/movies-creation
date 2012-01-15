@@ -4,103 +4,94 @@
 
     <!--
         Template for HTML5 video using Video JS (http://videojs.com/)
-        August 12, 2010
+        Januaray, 2012
         Nicolas Bigaouette <nbigaouette@gmail.com>
-        Video Js git commit id: 964163a
+        video-js version 3.0.7
+        Please visit http://hivelogic.com/enkoder/ to get the encoded email part (spam prevention)
 
         Do a search and replace on these strings:
-            OGV_VIDEO_FILE      your Ogg+Theora video file
-            MP4_VIDEO_FILE      your Mp4+H264 video file
-            WEBM_VIDEO_FILE     your WebM video file
+            VIDEO_POSTER        The fixed image shown before the video is played
+            WEBM_VIDEO_FILE     Your WebM video file
+            OGV_VIDEO_FILE      Your Ogg+Theora video file
+            MP4_VIDEO_FILE      Your Mp4+H264 video file
             PAGE_TITLE          The page/video title
-            MP4_URL             The full url for the mp4 file. Flash fallback needs a FULL url.
             VIDEO_WIDTH         The video width
             VIDEO_HEIGHT        The video height
-
-        You might want to change the footer of the page.
     -->
 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>PAGE_TITLE</title>
 
-        <!-- Include the VideoJS Library -->
-        <script src="videojs/video.js" type="text/javascript" charset="utf-8"></script>
-        <!-- JQuery not required, but used for dom ready function -->
-        <script src="videojs/jquery-1.4.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" src="generated_toc.js"></script>
 
-        <script type="text/javascript">
-            // Run the script on page load.
-            // Using JQuery's DOM Ready function
-            // You can also use window.onload, but it loads slower
-            $(function(){
-                VideoJS.setup();
-            })
-            // If not using a JS library
-            //window.onload = function(){
-            //    VideoJS.setup();
-            //}
-        </script>
-        <!-- Include the VideoJS Stylesheet -->
-        <link rel="stylesheet" href="videojs/video-js.css" type="text/css" media="all" />
-
-        <script src="flowplayer/flowplayer-3.2.2.min.js"></script>
-
-
+        <link href="video-js.css" rel="stylesheet">
+        <script src="video.js"></script>
     </head>
 
-    <body>
-        <div style="vertical-align: middle; text-align: center;" >
+    <body id="top">
 
-            <h1>
-                PAGE_TITLE
-            </h1>
+        <div id="generated-toc"></div>
 
-            <!-- Begin VideoJS -->
-            <div class="video-js-box">
-                <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
-                <video class="video-js" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" poster="poster.png" controls preload>
-                    <source src="MP4_VIDEO_FILE" type='video/mp4'>
-                    <source src="WEBM_VIDEO_FILE" type='video/webm; codecs="vp8, vorbis"'>
-                    <source src="OGV_VIDEO_FILE" type='video/ogg; codecs="theora, vorbis"'>
-                    <object class="vjs-flash-fallback" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" type="application/x-shockwave-flash" data="flowplayer/flowplayer.swf">
-                        <param name="movie" value="flowplayer/flowplayer.swf" />
-                        <param name="allowfullscreen" value="true" />
-                        <param name="flashvars" value='config={"clip":{"url":"MP4_URL/MP4_VIDEO_FILE","autoPlay":false,"autoBuffering":true}}' />
-                        <img src="poster.png" width="VIDEO_WIDTH" height="VIDEO_HEIGHT" alt="PAGE_TITLE" title="No video playback capabilities." />
-                    </object>
-                </video>
-            </div>
-
-            <!-- you *must* offer a download link as they may be able to play the file locally. customise this bit all you want -->
-            <p>
-                Download Video: <a href="OGV_VIDEO_FILE">Open Format: OGG container, Theora compression</a> | <a href="MP4_VIDEO_FILE">Patent encumbered: MP4 container, H.264 compression</a>
-            </p>
-
-            <!-- **************************************************************************************************************** -->
-            <h2>
-                <a href="http://www.science.uottawa.ca/lramunno/">Prof. Lora Ramunno's Computationnal Nanophotonics Group</a>
-            </h2>
-
-            <p>
-                Lora Ramunno: <a href="mailto:lora.ramunno@uottawa.ca">lora.ramunno@uottawa.ca</a>
-            </p>
-            <p>
-                Edward Ackad: <a href="mailto:eackad@gmail.com">eackad@gmail.com</a>
-            </p>
-            <p>
-                Nicolas Bigaouette: <a href="mailto:nbigaouette@gmail.com">nbigaouette@gmail.com</a>
-            </p>
-            <!-- **************************************************************************************************************** -->
-
-        </div>
+        <h1>
+            PAGE_TITLE
+        </h1>
 
         <p>
-            <a href="http://jigsaw.w3.org/css-validator/check/referer">
-                <img style="border:0;width:88px;height:31px"
-                    src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-                    alt="Valid CSS!" />
-            </a>
+            <video id="my_video_1" class="video-js vjs-default-skin" controls preload="auto" data-setup="{}"
+                    width="VIDEO_WIDTH" height="VIDEO_HEIGHT" poster="VIDEO_POSTER">
+                <source src="MP4_VIDEO_FILE"  type='video/mp4'>
+                <source src="WEBM_VIDEO_FILE" type='video/webm'>
+                <source src="OGV_VIDEO_FILE"  type='video/ogv'>
+            </video>
+        </p>
+        <p>
+            Download video (right click and "Save As"):
+            <ul>
+                <li><a href="WEBM_VIDEO_FILE">Open format: WebM (Matroska container, VP8 compression)</a></li>
+                <li><a href="OGV_VIDEO_FILE">Open format (OGG container, Theora compression)</a></li>
+                <li><a href="MP4_VIDEO_FILE">Closed format (MP4 container, H.264 compression)</a></li>
+            </ul>
+        </p>
+
+        <!-- **************************************************************************************************************** -->
+        <h1>Contact</h1>
+        <p>
+            <p>
+                Visit <a href="http://hivelogic.com/enkoder/">http://hivelogic.com/enkoder/</a>
+                to get an obsuscated javascript piece of code to generate the email address
+                (spam prevention).
+            </p>
+            Email me: <!-- http://hivelogic.com/enkoder/ -->
+            <script type="text/javascript">
+            //<![CDATA[
+            <!--
+            var x="function f(x){var i,o=\"\",ol=x.length,l=ol;while(x.charCodeAt(l/13)!" +
+            "=50){try{x+=x;l+=l;}catch(e){}}for(i=l-1;i>=0;i--){o+=x.charAt(i);}return o" +
+            ".substr(0,ol);}f(\")27,\\\"r\\\\500\\\\710\\\\230\\\\020\\\\710\\\\Q000\\\\" +
+            "220\\\\320\\\\300\\\\t\\\\vNFW010\\\\@I100\\\\~430\\\\Cmm=>G,(:K+a|t{tx/,Qa" +
+            "d~}ge$Y9mehl730\\\\]^'730\\\\420\\\\X330\\\\730\\\\420\\\\130\\\\6P-M330\\\\"+
+            "200\\\\410\\\\L410\\\\700\\\\000\\\\TYD9100\\\\610\\\\Br\\\\t\\\\>38|4.y35=" +
+            ">320\\\\l020\\\\w-*0+4630\\\\630\\\\fUYW430\\\\\\\\\\\\GMGOfAVT{iuyq}p~4c~d" +
+            "oeo\\\"\\\\!F730\\\\220\\\\700\\\\330\\\\Q610\\\\QIAt\\\\t\\\\600\\\\520\\\\"+
+            "6/,w#;6<:.$-\\\"(f};o nruter};))++y(^)i(tAedoCrahc.x(edoCrahCmorf.gnirtS=+o" +
+            ";721=%y;++y)27<i(fi{)++i;l<i;0=i(rof;htgnel.x=l,\\\"\\\"=o,i rav{)y,x(f noi" +
+            "tcnuf\")"                                                                    ;
+            while(x=eval(x));
+            //-->
+            //]]>
+            </script>
+            <noscript>Sorry, you need Javascript on to email me.</noscript>
+        </p>
+        <a href="http://mysite.science.uottawa.ca/lramunno/">Prof. Lora Ramunno's Computationnal Nanophotonics Group</a>
+        <p><a href="#top">Back to top</a></p>
+
+        <p>
+            <div style="vertical-align: middle; text-align: center" >
+                <a href="https://www.google.com/chrome/"><img alt="Get Chrome!"  src="getchrome.png"/></a>
+                <a href="http://www.mozilla.org"        ><img alt="Get Firefox!" src="getfirefox.png"/></a>
+                <a href="http://www.opera.com/browser/" ><img alt="Get Opera!"   src="http://promote.opera.com/small/opera80x15.gif"></a>
+            </div>
         </p>
 
     </body>
