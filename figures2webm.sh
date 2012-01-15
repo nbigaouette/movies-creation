@@ -34,10 +34,11 @@ if [[ "x$@" == "x" || "x$@" == "x-h" || "x$@" == "x--help" ]]; then
     usage
 fi
 
-while getopts hi:p:o:r: name; do
+while getopts hi:p:f:o:r: name; do
     case $name in
         i)  arg_figures_path="$OPTARG";;
         p)  arg_figures_pattern="$OPTARG";;
+        f)  arg_format="$OPTARG";;
         o)  arg_output_video="$OPTARG";;
         r)  arg_resolution="$OPTARG";;
         h)  usage;;
@@ -47,11 +48,12 @@ done
 
 figures_path="${arg_figures_path-${default_figures_path}}"
 figures_pattern="${arg_figures_pattern-${default_figures_pattern}}"
+c="${arg_format-${default_format}}"
 output_video="${arg_output_video-${default_output_video}}"
 resolution="${arg_resolution-${default_resolution}}"
 
-cmd1="ffmpeg -i ${figures_path}/${figures_pattern}.png -s ${resolution} -vpre libvpx-720p -b 2000k -pass 1 -an -f webm -y ${output_video}"
-cmd2="ffmpeg -i ${figures_path}/${figures_pattern}.png -s ${resolution} -vpre libvpx-720p -b 2000k -pass 2 -an -f webm -y ${output_video}"
+cmd1="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -s ${resolution} -vpre libvpx-720p -b 2000k -pass 1 -an -f webm -y ${output_video}"
+cmd2="ffmpeg -i ${figures_path}/${figures_pattern}.${format} -s ${resolution} -vpre libvpx-720p -b 2000k -pass 2 -an -f webm -y ${output_video}"
 
 echo "$cmd1"
 $cmd1
