@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [[ "${1/*./}" != "ogv" ]]; then
-    echo "Argument must be an .ogv file (\"$1\" given)"
+if [[ "${1/*./}" != "webm" ]]; then
+    echo "Argument must be an .webm file (\"$1\" given)"
     exit
 fi
 
 ogv_file="${1}"
-mp4_file="${1/.ogv/.mp4}"
+mp4_file="${1/.webm/.mp4}"
 
 
 cmd_ffmpeg="ffmpeg -i ${ogv_file} -vcodec libx264 -threads 0 ${mp4_file}"
