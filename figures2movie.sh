@@ -5,7 +5,7 @@ default_figures_pattern="mov%04d"
 default_figure_format="png"
 default_video_filename="output"
 default_video_format="webm"
-default_resolution="800x600"
+default_resolution="NoChange"
 default_h264_profile="max"
 
 function usage()
@@ -60,12 +60,16 @@ figures_pattern="${arg_figures_pattern-${default_figures_pattern}}"
 figure_format="${arg_figure_format-${default_figure_format}}"
 video_filename="${arg_video_filename-${default_video_filename}}"
 video_format="${arg_video_format-${default_video_format}}"
-resolution="${arg_resolution-${default_resolution}}"
 profile="${arg_profile-${default_h264_profile}}"
 
 video_filename=${video_filename/.*/}.${video_format}
 if [[ "${figures_path#${figures_path%?}}x" != "/x" ]]; then
     figures_path="${figures_path}/"
+fi
+
+resolution_arg=""
+if [[ "${arg_resolution}x" != "x" ]]; then
+    resolution_arg="-s ${arg_resolution}"
 fi
 
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
@@ -76,14 +80,14 @@ export FFMPEG_DATADIR=${script_dir}/ffmpeg-presets/
 # http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
 case ${video_format} in
     webm)   commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
             );;
     ogv)    commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -s ${resolution} -vcodec libtheora -b:v 2000k ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vcodec libtheora -b:v 2000k ${video_filename}"
             );;
     mp4)    commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -vcodec libx264 -s ${resolution} -threads 0 -vpre ${profile} -crf 25 ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -vcodec libx264 ${resolution_arg} -threads 0 -vpre ${profile} -crf 25 ${video_filename}"
             );;
 esac
 
