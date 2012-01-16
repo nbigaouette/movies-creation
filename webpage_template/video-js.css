@@ -22,6 +22,9 @@ REQUIRED STYLES (be careful overriding)
   /* Allow poster to be vertially aligned. */
   vertical-align: middle;
   /*  display: table-cell; */ /*This works in Safari but not Firefox.*/
+
+  /* Center the video (http://stackoverflow.com/questions/5879209/how-to-center-html5-videos) */
+  margin: 0 auto;
 }
 
 /* Playback technology elements expand to the width/height of the containing div. <video> or <object> */
