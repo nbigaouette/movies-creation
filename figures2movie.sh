@@ -4,6 +4,7 @@ default_figures_path="figures"
 default_figures_pattern="mov%04d"
 default_figure_format="png"
 default_video_filename="output"
+default_fps="24"
 default_video_format="webm"
 default_resolution="NoChange"
 default_h264_profile="max"
@@ -23,6 +24,8 @@ function usage()
     echo "                                  DEFAULT: ${default_figures_pattern}"
     echo "-f <figure_format>            Figure format."
     echo "                                  DEFAULT: ${default_figure_format}"
+    echo "-a <fps>                       Frame per second (frame rate)."
+    echo "                                  DEFAULT: ${default_fps}"
     echo "-v <video_format>             Video format."
     echo "                                  Available: webm, ogv, mp4 (h264)"
     echo "                                  DEFAULT: ${default_video_format}"
@@ -41,11 +44,12 @@ if [[ "x$@" == "x" || "x$@" == "x-h" || "x$@" == "x--help" ]]; then
     usage
 fi
 
-while getopts hi:p:f:v:o:r:q: name; do
+while getopts hi:p:f:a:v:o:r:q: name; do
     case $name in
         i)  arg_figures_path="$OPTARG";;
         p)  arg_figures_pattern="$OPTARG";;
         f)  arg_figure_format="$OPTARG";;
+        a)  arg_fps="$OPTARG";;
         v)  arg_video_format="$OPTARG";;
         o)  arg_video_filename="$OPTARG";;
         r)  arg_resolution="$OPTARG";;
@@ -58,6 +62,7 @@ done
 figures_path="${arg_figures_path-${default_figures_path}}"
 figures_pattern="${arg_figures_pattern-${default_figures_pattern}}"
 figure_format="${arg_figure_format-${default_figure_format}}"
+video_fps="${arg_fps-${default_fps}}"
 video_filename="${arg_video_filename-${default_video_filename}}"
 video_format="${arg_video_format-${default_video_format}}"
 profile="${arg_profile-${default_h264_profile}}"
@@ -80,14 +85,14 @@ export FFMPEG_DATADIR=${script_dir}/ffmpeg-presets/
 # http://rob.opendot.cl/index.php/useful-stuff/ffmpeg-x264-encoding-guide/
 case ${video_format} in
     webm)   commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -r ${video_fps} -vpre libvpx-720p -b:v 2000k -pass 1 -f webm -y ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -r ${video_fps} -vpre libvpx-720p -b:v 2000k -pass 2 -f webm -y ${video_filename}"
             );;
     ogv)    commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -vcodec libtheora -b:v 2000k ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} ${resolution_arg} -r ${video_fps} -vcodec libtheora -b:v 2000k ${video_filename}"
             );;
     mp4)    commands=(
-                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -vcodec libx264 ${resolution_arg} -threads 0 -vpre ${profile} -crf 25 ${video_filename}"
+                "ffmpeg -an -i ${figures_path}${figures_pattern}.${figure_format} -vcodec libx264 ${resolution_arg} -threads 0 -r ${video_fps} -vpre ${profile} -crf 25 ${video_filename}"
             );;
 esac
 
